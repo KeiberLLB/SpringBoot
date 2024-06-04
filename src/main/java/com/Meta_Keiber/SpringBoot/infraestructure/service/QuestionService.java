@@ -43,6 +43,8 @@ public class QuestionService implements IQuestionService {
 
     List<OptionQuestionRQ> optionQRQ = request.getOptionQuestion();
     Question entityQuestion = this.requestToEntity(request);
+    entityQuestion = this.questionRepository.save(entityQuestion);
+
     for (OptionQuestionRQ optionRQ : optionQRQ) {
       OptionQuestion entity = OptionQuestion.builder()
           .text(optionRQ.getText())
@@ -52,7 +54,9 @@ public class QuestionService implements IQuestionService {
           .build();
       this.optionQuestionRespository.save(entity);
     }
-    return this.entityToResponse(this.questionRepository.save(entityQuestion));
+    QuestionRS obj = this.entityToResponse(this.find(entityQuestion.getQuestion_id()));
+    System.out.println(entityQuestion);
+    return obj;
   }
 
   private QuestionRS entityToResponse(Question save) {
