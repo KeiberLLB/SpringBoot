@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,9 +20,9 @@ public class QuestionRQ {
   @NotBlank(message = "Type question is required")
   private String type;
   private boolean active;
-  @NotBlank(message = "Survey id is required")
+  @NotNull(message = "Survey id is required")
   private int survey_id;
   @NotEmpty(message = "Option Questions are required")
   private List<OptionQuestionRQ> optionQuestion;
-  
+
 }
