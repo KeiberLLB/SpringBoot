@@ -1,6 +1,9 @@
 package com.Meta_Keiber.SpringBoot.api.dto.request;
 
+import java.util.List;
+
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +21,7 @@ public class QuestionRQ {
   private boolean active;
   @NotBlank(message = "Survey id is required")
   private int survey_id;
+  @NotEmpty(message = "Option Questions are required")
+  private List<OptionQuestionRQ> optionQuestion;
   
 }
