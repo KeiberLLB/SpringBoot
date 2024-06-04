@@ -14,6 +14,4 @@ public class OptionQuestionRQ {
   @NotBlank(message = "The text in the option question is required")
   private String text;
   private Boolean active;
-  @NotBlank(message = "The question id is required")
-  private int question_id;
 }
