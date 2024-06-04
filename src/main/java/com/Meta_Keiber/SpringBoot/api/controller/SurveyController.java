@@ -39,6 +39,7 @@ public class SurveyController {
       @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) })
   @PostMapping
   public ResponseEntity<SurveyBasicRS> create(@Validated @RequestBody SurveyRQ request) {
+    
     return ResponseEntity.ok(this.surveyService.create(request));
   }
 

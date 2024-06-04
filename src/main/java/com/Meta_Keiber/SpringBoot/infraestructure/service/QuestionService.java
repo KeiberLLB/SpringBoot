@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -111,14 +113,21 @@ public class QuestionService implements IQuestionService {
 
   @Override
   public void delete(Integer id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    this.questionRepository.delete(this.find(id));
   }
 
   @Override
   public Page<QuestionBasicRS> getAll(int page, int size, SortType sortType) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+    if (page < 0)
+      page = 0;
+    PageRequest pagination = null;
+    switch (sortType) {
+      case NONE -> pagination = PageRequest.of(page, size);
+      case ASC -> pagination = PageRequest.of(page, size, Sort.by(FIELD_BY_SORT).ascending());
+      case DESC -> pagination = PageRequest.of(page, size, Sort.by(FIELD_BY_SORT).descending());
+    }
+    return this.questionRepository.findAll(pagination)
+        .map(this::entityToResponse);
   }
 
   private Question find(Integer id) {
