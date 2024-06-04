@@ -15,6 +15,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.ToString;
 
 @Entity(name = "survey")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Survey {
@@ -34,6 +36,7 @@ public class Survey {
   @Column(nullable = false)
   private String description;
   @Column(nullable = false)
+  @Builder.Default
   private LocalDateTime creationDate = LocalDateTime.now();
   @Column(nullable = false)
   private boolean active;
