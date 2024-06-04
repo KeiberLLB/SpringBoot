@@ -32,7 +32,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping(path = "/users")
 @AllArgsConstructor
-public class UserControler {
+public class UserController {
   @Autowired
   private IUserService userService;
 
@@ -51,7 +51,7 @@ public class UserControler {
   }
 
   @Operation(summary = "Get User", description = "TEST")
-  @ApiResponse(responseCode = "404", description = "When the id is not valid", content = {
+  @ApiResponse(responseCode = "400", description = "When the id is not valid", content = {
       @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)) })
   @GetMapping(path = "/get/{id}")
   public ResponseEntity<UserBasicRS> get(@PathVariable int id) {
